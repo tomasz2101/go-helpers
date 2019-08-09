@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net"
+	"os"
 	"time"
 )
 
@@ -36,4 +37,13 @@ func GetJSON(v interface{}) []byte {
 		fmt.Printf("%s\n", err)
 	}
 	return res1B
+}
+
+// GetEnv will give env value of default one
+func GetEnv(key, fallback string) string {
+	value, exists := os.LookupEnv(key)
+	if !exists {
+		value = fallback
+	}
+	return value
 }
